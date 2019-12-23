@@ -69,11 +69,11 @@ const App = () => {
 
     return (
         <div>
-            <section style={{ height: 200 }}>
+            <section style={{ height: '33vh' }}>
                 <h3>基本</h3>
                 <ReactDemo imageDatas={data} />
             </section>
-            <section style={{ height: 200 }}>
+            <section style={{ height: '33vh' }}>
                 <h3>方法演示</h3>
                 <button onClick={handlePrev}>上一张</button>
                 <button onClick={handleNext}>下一张</button>
@@ -81,7 +81,7 @@ const App = () => {
                 <button onClick={handleGoto}>自定义张</button>
                 <ReactDemo imageDatas={data} ref={ref} />
             </section>
-            <section style={{ height: 200 }}>
+            <section style={{ height: '33vh' }}>
                 <h3>自动切换</h3>
                 <ReactDemo imageDatas={data} autoPlay={true} />
             </section>
