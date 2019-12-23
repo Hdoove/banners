@@ -1,12 +1,16 @@
-import React from 'react'
+import React, {
+    useRef,
+    useState
+} from 'react'
 import {
     render
 } from 'react-dom'
 // import ReactDemo from 'react-banners-third';
 // import 'react-banners-third/lib/main.min.css'; // ！需要引入样式！
-import ReactDemo from '../../src'
+import ReactDemo from '../../src';
 
-const data = [{
+const data = [
+    {
         index: 0,
         imgUrl: 'http://p1.music.126.net/50-IECuAUbyVR_Jtq2DqWw==/109951164572416908.jpg'
     },
@@ -44,8 +48,44 @@ const data = [{
     }
 ];
 
-const App = () => < ReactDemo imageDatas = {
-    data
+const App = () => {
+    const [value, setValue] = useState(0);
+    const ref = useRef(null);
+
+    function handlePrev(data) {
+        const { index, prev } = ref.current;
+        prev(index);
+    }
+
+    function handleNext(data) {
+        const { next, index } = ref.current;
+        next(index);
+    }
+
+    function handleGoto(data) {
+        const { goTo } = ref.current;
+        goTo(Number(value));
+    }
+
+    return (
+        <div>
+            <section style={{ height: 200 }}>
+                <h3>基本</h3>
+                <ReactDemo imageDatas={data} />
+            </section>
+            <section style={{ height: 200 }}>
+                <h3>方法演示</h3>
+                <button onClick={handlePrev}>上一张</button>
+                <button onClick={handleNext}>下一张</button>
+                <input type="number" value={value} onChange={(e) => setValue(e.target.value)} />
+                <button onClick={handleGoto}>自定义张</button>
+                <ReactDemo imageDatas={data} ref={ref} />
+            </section>
+            <section style={{ height: 200 }}>
+                <h3>自动切换</h3>
+                <ReactDemo imageDatas={data} autoPlay={true} />
+            </section>
+        </div>
+    )
 }
-/>
-render( < App / > , document.getElementById('root'));
+render(< App />, document.getElementById('root'));

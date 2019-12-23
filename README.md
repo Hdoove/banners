@@ -2,7 +2,9 @@
 
 #### npm地址 https://www.npmjs.com/package/react-banners-third
 
-##### 1.使用方法
+#### 在线访问地址  http://101.200.191.21:8082/
+
+#### 1.使用方法
 ````
 
 // 安装
@@ -27,6 +29,7 @@ const { next, index, prev } = ref.current;
 
 next(index) 上一页
 prev(index) 下一页
+goTo(index) 指定页
 index 当前页
 
 function handleGetInfo(data) {
@@ -42,6 +45,8 @@ function handleGetInfo(data) {
 参数 | 说明 | 类型 | 默认值 
 - | :-: | :-: | :-: | -:
 imageDatas | 图片参数 | Array({ index: number, imgUrl: string }) | 无 |
+autoplay | 是否自动切换 | boolean | false |
+delay | 切换间隔 | number | 2000 |
 dots | 是否显示面板指示点| boolean | true |
 dotPosition | 面板指示点位置，可选 inset、outset| string | outset |
 getImageInfo | 获取点击图片信息| function | 无 |
@@ -50,5 +55,6 @@ getImageInfo | 获取点击图片信息| function | 无 |
 
 名称 | 描述 
 - | :-: | :-: | :-: | -:
-next() | 切换到下一面板
-prev() | 切换到上一面板
+next(index: number) | 切换到下一面板
+prev(index: number) | 切换到上一面板
+goTo(index: number) | 切换到指定面板
