@@ -27,8 +27,9 @@ const devConfig = {
     devServer: {
         contentBase: path.join(__dirname, '../test/src/'),
         compress: true,
-        port: 3001, // 启动端口为 3001 的服务
-        open: true // 自动打开浏览器
+        port: 8082, // 启动端口为 3001 的服务
+        open: true, // 自动打开浏览器
+        host: '0.0.0.0'
     },
 };
 module.exports = merge(devConfig, baseConfig); // 将baseConfig和devConfig合并为一个配置
