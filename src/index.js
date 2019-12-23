@@ -27,12 +27,12 @@ const ReactBanners = forwardRef((props, ref) => {
 
     useEffect(() => {
         setLen(imageDatas.length);
-        setTimer(setInterval(() => {
-            handleTurnLeft(selectItem);
-        }, 1000));
-        return function () {
-            clearTimeout(timer);
-        }
+        // setTimer(setInterval(() => {
+        //     handleTurnLeft(selectItem);
+        // }, 1000));
+        // return function () {
+        //     clearTimeout(timer);
+        // }
     }, []);
 
     useEffect(() => {
@@ -41,6 +41,17 @@ const ReactBanners = forwardRef((props, ref) => {
     }, [len])
 
     function handleTurnRight(num) {
+        setLoop(loop - 1 < 0 ? 2 : loop - 1);
+        setSelectItem(num + 1 > len - 1 ? 0 : num + 1);
+        setShowData(
+            [
+                imageDatas[num > len - 1 ? num - len : num],
+                imageDatas[num + 1 > len - 1 ? num + 1 - len : num + 1],
+                imageDatas[num + 2 > len - 1 ? num + 2 - len : num + 2]]
+        );
+    }
+
+    function handleTurnLeft(num) {
         setLoop(loop + 1 > 2 ? 0 : loop + 1);
         setSelectItem(num - 1 < 0 ? len - 1 : num - 1);
         setShowData(
@@ -49,17 +60,6 @@ const ReactBanners = forwardRef((props, ref) => {
                 imageDatas[num <= 0 ? len - 1 : num - 1],
                 imageDatas[num < 0 ? len - 1 : num]
             ]
-        );
-    }
-
-    function handleTurnLeft(num) {
-        setLoop(loop - 1 < 0 ? 2 : loop - 1);
-        setSelectItem(num + 1 > len - 1 ? 0 : num + 1);
-        setShowData(
-            [
-                imageDatas[num > len - 1 ? num - len : num],
-                imageDatas[num + 1 > len - 1 ? num + 1 - len : num + 1],
-                imageDatas[num + 2 > len - 1 ? num + 2 - len : num + 2]]
         );
     }
 
@@ -108,14 +108,14 @@ const ReactBanners = forwardRef((props, ref) => {
                         />
                     })
                 }
-                <div className={`${styles.leftCover} ${styles.left}`} onMouseOver={handleMouseOver} />
-                <div className={`${styles.rightCover} ${styles.right}`} onMouseOver={handleMouseOver} />
+                <div className={`${styles.leftCover} ${styles.left}`} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
+                <div className={`${styles.rightCover} ${styles.right}`} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
             </div>
             {
                 dots && <div className={styles.btns} style={{ top: dotPosition === 'inset' ? '15vw' : '21vw' }}>
                     {
                         len > 0 && Array.from({ length: len }).map((item, index) => {
-                            return <div onClick={() => { index > selectItem ? handleTurnLeft(index - 1) : handleTurnRight(index + 1) }} key={index} className={`${styles.btn} ${index === selectItem ? styles.activeBtn : ''}`} />
+                            return <div onClick={() => { index > selectItem ? handleTurnRight(index - 1) : handleTurnLeft(index + 1) }} key={index} className={`${styles.btn} ${index === selectItem ? styles.activeBtn : ''}`} />
                         })
                     }
                 </div>
