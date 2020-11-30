@@ -1,5 +1,5 @@
 #### React Component 轮播图（适用于三张图片的轮播图）
-
+让我试一试
 #### npm地址 https://www.npmjs.com/package/react-banners-third
 
 #### 在线访问地址  http://101.200.191.21:8082/
